@@ -1,0 +1,14 @@
+#
+# Description: This playbook runs each role required to setup the server to desired state.
+# Example: ansible-playbook -i inventory server_config.yaml
+#
+---
+- name: Execute all roles required for this playbook
+  hosts: all
+  gather_facts: false
+  # become: true
+
+  tasks:
+    - name: ROLE | initial_setup
+      ansible.builtin.include_role:
+        name: initial_setup
