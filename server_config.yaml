@@ -1,0 +1,29 @@
+#
+# Description: This playbook runs each role required to setup the server to desired state.
+# Example: ansible-playbook -i inventory server_config.yaml --ask-become-pass
+#
+---
+- name: Home server configuration setup
+  hosts: all
+#  become: true
+
+  tasks:
+    - name: Ensure .ssh directory exists
+      ansible.builtin.file:
+        path: "{{ target_user_home }}/.ssh"
+        state: directory
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: "0700"
+
+    - name: Copy ssh private key to {{ target_user }}
+      ansible.builtin.copy:
+        src: {{ item }}
+        dest: "{{ target_user_home }}/.ssh/"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0600'
+      with_items:
+        - authorized_keys
+        - id_rsa
+        - id_rsa.pub

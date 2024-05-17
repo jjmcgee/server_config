@@ -1,0 +1,3 @@
+---
+target_user: john
+target_user_home: /home/{{ target_user }}

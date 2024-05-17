@@ -1,4 +1,12 @@
 ---
-villanelle:
-  hosts:
-    villanelle:
+
+all:
+  children:
+    home_vms:
+      hosts:
+        villanelle:
+          ansible_host: 192.168.86.14
+    home_servers:
+      hosts:
+        slytherin:
+          ansible_host: 192.168.86.11
