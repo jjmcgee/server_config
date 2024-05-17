@@ -8,6 +8,7 @@
 #  become: true
 
   tasks:
+  # step 1, configure .ssh dir of target user
     - name: Ensure .ssh directory exists
       ansible.builtin.file:
         path: "{{ target_user_home }}/.ssh"
@@ -27,3 +28,19 @@
         - authorized_keys
         - id_rsa
         - id_rsa.pub
+
+  # step 2 install applications needed
+    - name: Install required packages
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - docker
+        - docker-compose
+
+  # step 3 make sure user has access to docker group
+    - name: Append docker group to {{ target_user }}
+      ansible.builtin.user:
+        name: "{{ target_user }}"
+        groups: docker
+        append: true
