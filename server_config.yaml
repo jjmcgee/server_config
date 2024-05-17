@@ -18,7 +18,7 @@
 
     - name: Copy ssh private key to {{ target_user }}
       ansible.builtin.copy:
-        src: {{ item }}
+        src: "{{ item }}"
         dest: "{{ target_user_home }}/.ssh/"
         owner: "{{ target_user }}"
         group: "{{ target_user }}"
