@@ -8,5 +8,9 @@ all:
           ansible_host: 192.168.86.14
     home_servers:
       hosts:
+        ravenclaw:
+          ansible_host: 192.168.86.10
         slytherin:
           ansible_host: 192.168.86.11
+        gryffindor:
+          ansible_host: 192.168.86.12
