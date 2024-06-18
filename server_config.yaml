@@ -37,6 +37,7 @@
       with_items:
         - docker
         - docker-compose
+        - git
 
   # step 3 make sure user has access to docker group
     - name: Append docker group to {{ target_user }}
