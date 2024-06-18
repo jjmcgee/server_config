@@ -39,6 +39,15 @@
         - docker-compose
         - git
 
+  # step 3 config
+    - name: Ensure gitconfig is configured
+      ansible.builtin.copy:
+        src: "gitconfig"
+        dest: "{{ target_user_home }}/.gitconfig"
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+
   # step 3 make sure user has access to docker group
     - name: Append docker group to {{ target_user }}
       ansible.builtin.user:
